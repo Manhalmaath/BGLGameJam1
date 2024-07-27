@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 691471530}
   - component: {fileID: 691471529}
   - component: {fileID: 691471528}
+  - component: {fileID: 691471532}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -523,6 +524,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &691471532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691471527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e471ba6f5f9481298f5fe88b55e468c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batteryLevelImage: {fileID: 364147988}
+  batteryLevelSprites:
+  - {fileID: 21300000, guid: d11a3ed23bf3f3f46b2b60bdf94f1ed9, type: 3}
+  - {fileID: 21300000, guid: 6be410e6472e62a45b84cc45a3eda42c, type: 3}
+  - {fileID: 21300000, guid: 6c26dd5dfb3816e408484cc18c4dc687, type: 3}
+  - {fileID: 21300000, guid: 03f69592d9838034b835d275e076f39f, type: 3}
 --- !u!1 &888356873
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,7 +881,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1669065295}
-  - component: {fileID: 1669065294}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -870,20 +888,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1669065294
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1669065293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e471ba6f5f9481298f5fe88b55e468c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  batteryLevelImage: {fileID: 0}
-  batteryLevelSprites: []
 --- !u!4 &1669065295
 Transform:
   m_ObjectHideFlags: 0
