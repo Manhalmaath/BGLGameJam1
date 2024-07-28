@@ -5,7 +5,6 @@ public class FlashlightController : MonoBehaviour
 {
     public Transform playerTransform;
     public GameObject flashlightEffect;
-    public float batteryLife = 100f; // Battery life in seconds
 
     private GameManager _gameManager;
 
@@ -26,19 +25,19 @@ public class FlashlightController : MonoBehaviour
 
         if (flashlightEffect.activeSelf)
         {
-            batteryLife -= Time.deltaTime;
+            _gameManager.batteryLevel -= Time.deltaTime;
 
-            if (batteryLife <= 0f)
+            if (_gameManager.batteryLevel <= 0f)
             {
                 flashlightEffect.SetActive(false);
             }
 
-            _gameManager.onBatteryLevelChange.Invoke(batteryLife);
+            _gameManager.onBatteryLevelChange.Invoke(_gameManager.batteryLevel);
         }
     }
-
+    
     public void RechargeBattery(float amount)
     {
-        batteryLife += amount;
+        _gameManager.batteryLevel += amount;
     }
 }

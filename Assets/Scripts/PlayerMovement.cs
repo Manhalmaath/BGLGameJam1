@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D _rb;
     private SpriteRenderer _spriteRenderer;
+    private Animator _playerAnimator;
     private bool _isGrounded;
     private bool _isFacingRight = true;
     
@@ -20,13 +21,14 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _spriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        _playerAnimator = _spriteRenderer.GetComponent<Animator>();
     }
 
     private void Update()
     {
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        float moveX = Input.GetAxis("Horizontal");
+        var moveX = Input.GetAxis("Horizontal");
         
         var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
@@ -41,15 +43,20 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(flashlightToggleKey))
         {
             flashlightController.flashlightEffect.SetActive(!flashlightController.flashlightEffect.activeSelf);
+            _playerAnimator.SetBool("isLightOn",flashlightController.flashlightEffect.activeSelf);
         }
 
         // Move the player
         _rb.velocity = new Vector2(moveX * speed, _rb.velocity.y);
+        
+        // Update the animator
+        _playerAnimator.SetBool("isRunning", moveX != 0);
 
         // Make the player jump
         if (_isGrounded && Input.GetButtonDown("Jump"))
         {
             _rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+            SFXManager.Instance.PlayJumpSound();
         }
     }
 
