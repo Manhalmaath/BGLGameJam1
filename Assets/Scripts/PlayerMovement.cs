@@ -13,9 +13,15 @@ public class PlayerMovement : MonoBehaviour
     private Animator _playerAnimator;
     private bool _isGrounded;
     private bool _isFacingRight = true;
-    
-    public FlashlightController flashlightController; 
-    public KeyCode flashlightToggleKey = KeyCode.F; 
+
+    public FlashlightController flashlightController;
+    public KeyCode flashlightToggleKey = KeyCode.F;
+    private Camera _camera;
+
+    private void Start()
+    {
+        _camera = Camera.main;
+    }
 
     private void Awake()
     {
@@ -29,8 +35,8 @@ public class PlayerMovement : MonoBehaviour
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         var moveX = Input.GetAxis("Horizontal");
-        
-        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        var mousePosition = _camera!.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
         bool shouldFaceRight = mousePosition.x > transform.position.x;
 
@@ -39,16 +45,16 @@ public class PlayerMovement : MonoBehaviour
         {
             Flip();
         }
-        
+
         if (Input.GetKeyDown(flashlightToggleKey))
         {
-            flashlightController.flashlightEffect.SetActive(!flashlightController.flashlightEffect.activeSelf);
-            _playerAnimator.SetBool("isLightOn",flashlightController.flashlightEffect.activeSelf);
+            flashlightController.ToggleFlashlight();
+            _playerAnimator.SetBool("isLightOn", flashlightController.flashlightEffect.activeSelf);
         }
 
         // Move the player
         _rb.velocity = new Vector2(moveX * speed, _rb.velocity.y);
-        
+
         // Update the animator
         _playerAnimator.SetBool("isRunning", moveX != 0);
 

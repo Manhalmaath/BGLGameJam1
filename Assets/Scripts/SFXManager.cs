@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SFXManager : MonoBehaviour
 {
@@ -6,7 +8,9 @@ public class SFXManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip jumpSound;
     [SerializeField] private AudioClip keyPickupSound;
+    [SerializeField] private AudioClip openDoorSound;
     [SerializeField] private AudioClip batteryPickupSound;
+    [SerializeField] private AudioClip toggleFlashlightSound;
 
     private void Awake()
     {
@@ -23,21 +27,47 @@ public class SFXManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlayJumpSound()
+    public void PlaySound(AudioClip clip)
     {
-        audioSource.clip = jumpSound;
+        StartCoroutine(PlaySoundCoroutine(clip));
+    }
+
+    private IEnumerator PlaySoundCoroutine(AudioClip clip)
+    {
+        // Wait until the current sound has finished playing
+        while (audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        // Play the new sound
+        audioSource.clip = clip;
         audioSource.Play();
     }
-    
+
+
+    public void PlayJumpSound()
+    {
+        PlaySound(jumpSound);
+    }
+
     public void PlayKeyPickupSound()
     {
-        audioSource.clip = keyPickupSound;
-        audioSource.Play();
+        PlaySound(keyPickupSound);
+    }
+
+    public void PlayOpenDoorSound()
+    {
+        PlaySound(openDoorSound);
     }
     
     public void PlayBatteryPickupSound()
     {
-        audioSource.clip = batteryPickupSound;
-        audioSource.Play();
+        PlaySound(batteryPickupSound);
+    }
+    
+    public void PlayToggleFlashlightSound()
+    {
+        PlaySound(toggleFlashlightSound);
     }
 }

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         var num = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
         switch (num.buildIndex)
         {
-            case 1 or 3:
+            case 1:
                 MusicManager.Instance.PlayDarkRoomMusic();
                 break;
             case 2:
@@ -37,6 +37,11 @@ public class GameManager : MonoBehaviour
         {
             timeLeft -= Time.deltaTime;
         }
+    }
+    
+    public void RechargeBattery(float amount)
+    {
+        batteryLevel += amount;
     }
 
     private void OnDestroy()

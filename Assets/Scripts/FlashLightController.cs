@@ -7,6 +7,19 @@ public class FlashlightController : MonoBehaviour
     public GameObject flashlightEffect;
 
     private GameManager _gameManager;
+    private Camera _camera;
+
+    private void Start()
+    {
+        if (Camera.main != null)
+        {
+            _camera = Camera.main;
+        }
+        else
+        {
+            Debug.LogError("Main camera not found");
+        }
+    }
 
     private void Awake()
     {
@@ -15,7 +28,9 @@ public class FlashlightController : MonoBehaviour
 
     private void Update()
     {
-        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (_camera == null) return;
+
+        var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
 
         var direction = mousePosition - playerTransform.position;
@@ -35,9 +50,11 @@ public class FlashlightController : MonoBehaviour
             _gameManager.onBatteryLevelChange.Invoke(_gameManager.batteryLevel);
         }
     }
-    
-    public void RechargeBattery(float amount)
+
+    public void ToggleFlashlight()
     {
-        _gameManager.batteryLevel += amount;
+        if (_gameManager.batteryLevel <= 0f) return;
+        flashlightEffect.SetActive(!flashlightEffect.activeSelf);
+        SFXManager.Instance.PlayToggleFlashlightSound();
     }
 }
