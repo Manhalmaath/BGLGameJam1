@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Key : MonoBehaviour
@@ -15,6 +14,7 @@ public class Key : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             _keyManager.onDoorOpen.Invoke();
+            SFXManager.Instance.PlayKeyPickupSound();
             Destroy(gameObject);
         }
     }

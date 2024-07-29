@@ -163,7 +163,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1253562591836778975}
   flashlightEffect: {fileID: 1253562591484023040}
-  batteryLife: 100
 --- !u!1 &1253562591705056872
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,8 +222,8 @@ Transform:
   m_GameObject: {fileID: 1253562591836778971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1253562593432935443}
   - {fileID: 1253562592838048240}
@@ -244,8 +243,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e787c509ef7c92b419ee626308ccb2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpForce: 5
+  speed: 7
+  jumpForce: 7
   groundCheck: {fileID: 1253562591705056879}
   groundCheckRadius: 0
   groundLayer:
@@ -514,7 +513,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0626e6f55e8caf24e8daa12791bb7649, type: 3}
+  m_Sprite: {fileID: 21300000, guid: da531936da2183a418e56859e7162bde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
